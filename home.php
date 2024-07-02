@@ -73,7 +73,7 @@ if (isset($_GET['success']) && $_GET['success'] == 1) {
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
     <meta charset="UTF-8">
@@ -86,10 +86,21 @@ if (isset($_GET['success']) && $_GET['success'] == 1) {
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script type="text/javascript" charset="utf8"
         src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
-    <title>Home</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Comment script dibawah agar dark mode sesuai konfigurasi laptop -->
+    <script>tailwind.config = {
+        darkMode: 'class'
+    };
+    </script>
+    <style type="text/tailwindcss">
+        #toggle:checked ~ label div.toggle-circle {
+        @apply translate-x-3;
+        }
+    </style>
+        <title>Home</title>
 </head>
 
-<body>
+<body class="dark:bg-slate-950 dark:text-slate-200">
     <button data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" aria-controls="logo-sidebar"
         type="button"
         class="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
@@ -161,12 +172,22 @@ if (isset($_GET['success']) && $_GET['success'] == 1) {
 
     <div class="p-4 sm:ml-64">
         <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
+        <div class="flex absolute top-10 right-5 p-5">
+            <span class="dark:text-slate-50 text-sm text-slate-950 mr-2 justify-center">Light</span>
+            <input type="checkbox" id="toggle" class="hidden">
+            <label for="toggle">
+            <div class="w-9 h-5 bg-slate-500 rounded-full flex items-center p-1 cursor-pointer">
+                <div class="w-4 h-4 bg-slate-50 rounded-full toggle-circle"></div>
+            </div>
+            </label>
+            <span class="dark:text-slate-50 text-sm text-slate-950 ml-2">Dark</span>
+        </div>
             <p class="text-3xl text-gray-900 dark:text-white mb-5 mt-5">Daftar Pengajuan Santunan Kecelakaan</p>
 
             <!-- Custom Dropdown Button -->
             <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown"
                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mb-5"
-                type="button" style="min-width: 250px;">All
+                type="button" style="min-width: 250px;">All Status
             </button>
 
             <!-- Hidden Select Element -->
@@ -222,7 +243,7 @@ if (isset($_GET['success']) && $_GET['success'] == 1) {
                 <!-- tabel pengajuans -->
                 <div class="relative overflow-x-auto w-full p-5">
                     <table id="pengajuansTable"
-                        class="display min-w-full text-sm divide-y divide-gray-200 dark:divide-gray-700">
+                        class="display min-w-full text-sm divide-y divide-gray-200 dark:divide-gray-700 dark:bg-slate-950">
                         <thead class="bg-gray-100 dark:bg-gray-700">
                             <tr>
                                 <th class="px-4 py-2 font-medium text-left text-gray-900 dark:text-white">NRP Pengaju
@@ -234,7 +255,7 @@ if (isset($_GET['success']) && $_GET['success'] == 1) {
                                 <!-- Add other headers with similar classes here -->
                             </tr>
                         </thead>
-                        <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
+                        <tbody class="dark:bg-slate-950 dark:text-slate-950">
                             <!-- DataTables will populate tbody -->
                         </tbody>
                     </table>
@@ -441,7 +462,7 @@ if (isset($_GET['success']) && $_GET['success'] == 1) {
                     <div class="grid md:grid-cols-2 md:gap-6">
                         <div class="relative z-0 w-full mb-5 group">
                             <label for="default-input"
-                                class="block mb-1 text-sm font-medium text-gray-500 dark:text-white">NRP</label>
+                                class="block mb-1 text-sm font-medium text-gray-500 dark:text-white dark:bg-slate-950">NRP</label>
                             <p class="text-md text-gray-900 dark:text-white mb-1 relative w-full">${pengajuan.nomor_unik}</p>
                         </div>
                         <div class="grid md:grid-cols-2 md:gap-6">
@@ -570,7 +591,7 @@ if (isset($_GET['success']) && $_GET['success'] == 1) {
                     modalFooter += `
                     <div class="grid md:grid-cols-2 md:gap-6">
                         <div class="relative z-0 w-full group">
-                            <button id="tolak-button" class="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-md px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 font-extrabold" style="width: 100%" data-id="${pengajuan.pengajuan_id}">Tolak Pengajuan</button>
+                            <button data-modal-target="popup-modal" data-modal-toggle="popup-modal" id="tolak-button" class="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-md px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 font-extrabold" style="width: 100%" data-id="${pengajuan.pengajuan_id}" type="button">Tolak Pengajuan</button>
                         </div>
                         <div class="relative z-0 w-full group">
                             <button id="kabag-button" class="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-md px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 font-extrabold" style="width: 100%" data-id="${pengajuan.pengajuan_id}">Teruskan Pengajuan</button>
@@ -743,6 +764,13 @@ if (isset($_GET['success']) && $_GET['success'] == 1) {
                 }
             });
         });
+        
+        const checkbox = document.querySelector('#toggle');
+        const html = document.querySelector('html');
+        checkbox.addEventListener('click', function()
+        {
+        checkbox.checked ? html.classList.add('dark') : html.classList.remove('dark')
+        })
     </script>
 </body>
 

@@ -1,7 +1,7 @@
 <?php
 $server = "localhost";
 $user = "root";
-$pass = "root";
+$pass = "";
 $database = "pengajuan_santunan";
 $conn = mysqli_connect($server, $user, $pass, $database);
 if (!$conn) {

@@ -98,6 +98,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <script type="text/javascript" charset="utf8"
         src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/datepicker.min.js"></script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Comment script dibawah agar dark mode sesuai konfigurasi laptop -->
+    <script>tailwind.config = {
+        darkMode: 'class'
+    };
+    </script>
+    <style type="text/tailwindcss">
+        #toggle:checked ~ label div.toggle-circle {
+        @apply translate-x-3;
+        }
+    </style>
     <title>Input Pengajuan</title>
 </head>
 
@@ -174,8 +186,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
     </aside>
 
-    <div class="p-4 sm:ml-64">
+    <div class="dark:bg-slate-950 p-4 sm:ml-64">
         <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
+        <div class="flex absolute top-10 right-5 p-5">
+            <span class="dark:text-slate-50 text-sm text-slate-950 mr-2 justify-center">Light</span>
+            <input type="checkbox" id="toggle" class="hidden">
+            <label for="toggle">
+            <div class="w-9 h-5 bg-slate-500 rounded-full flex items-center p-1 cursor-pointer">
+                <div class="w-4 h-4 bg-slate-50 rounded-full toggle-circle"></div>
+            </div>
+            </label>
+            <span class="dark:text-slate-50 text-sm text-slate-950 ml-2">Dark</span>
+        </div>    
             <p class="text-3xl text-gray-900 dark:text-white mb-5 mt-5">Input Pengajuan</p>
             <div class="flex">
                 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post"
@@ -409,6 +431,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
     </div>
     <script>
+        const checkbox = document.querySelector('#toggle');
+        const html = document.querySelector('html');
+        checkbox.addEventListener('click', function()
+        {
+        checkbox.checked ? html.classList.add('dark') : html.classList.remove('dark')
+        })
     </script>
 </body>
 
