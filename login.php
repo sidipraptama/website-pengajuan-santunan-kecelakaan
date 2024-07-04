@@ -36,9 +36,9 @@ if (isset($_POST['submit'])) {
   <!-- <link rel="stylesheet" type="text/css" href="style.css"> -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Comment script dibawah agar dark mode sesuai konfigurasi laptop -->
-  <script>tailwind.config = {
+  <!-- <script>tailwind.config = {
     darkMode: 'class'
-  };
+  }; -->
   </script>
   <style type="text/tailwindcss">
     #toggle:checked ~ label div.toggle-circle {

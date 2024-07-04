@@ -285,7 +285,7 @@ if (isset($_GET['success']) && $_GET['success'] == 1) {
                     </button>
                 </div>
                 <!-- Modal body -->
-                <div class="p-4 md:p-5 overflow-auto w-full max-h-[100px]" id="modal-content">
+                <div class="p-4 md:p-5 overflow-auto w-full" id="modal-content">
                     <!-- Content will be populated by JavaScript -->
                 </div>
                 <!-- Modal footer -->
